@@ -1,0 +1,137 @@
+LIBRARY ieee;
+  USE ieee.std_logic_1164.all;
+  USE ieee.std_logic_unsigned.all;
+  USE ieee.std_logic_arith.all;
+  
+ENTITY pantalla IS
+  PORT(		SW 												: IN STD_LOGIC_VECTOR (7 downto 0);
+			CLOCK_50,CLOCK2_50 								: IN STD_LOGIC;
+			KEY												: IN STD_LOGIC_VECTOR(1 DOWNTO 0);
+			LEDR 											: OUT STD_LOGIC_VECTOR(17 downto 0);     
+			--Video
+			VGA_SYNC, VGA_BLANK, VGA_CLK 					: OUT STD_LOGIC;
+			VGA_HS, VGA_VS 									: OUT STD_LOGIC;
+			VGA_R, VGA_G, VGA_B 							: OUT STD_LOGIC_VECTOR(7 downto 0);
+			--Audio
+			AUD_DACLRCK, AUD_ADCLRCK, AUD_BCLK,AUD_ADCDAT 	: IN STD_LOGIC;
+			I2C_SDAT															:INOUT STD_LOGIC;
+			I2C_SCLK,AUD_DACDAT,AUD_XCK											:OUT STD_LOGIC);
+
+END pantalla;
+
+architecture uno of pantalla is
+  
+--  type colores is array (2 downto 0) of std_logic_vector(7 downto 0);
+--  signal color : colores; 
+ -- signal KEYaux: std_logic; 
+  signal hsync, vsync	:	std_logic;
+  signal red_signal,	green_signal, blue_signal	: std_logic_vector (7 downto 0);
+  signal h_cnt, v_cnt : integer;
+  signal FFD1,FFD2,FFD3	:	std_logic;
+  signal C: std_logic;
+  signal prueba: integer;
+  signal RESET: std_logic;
+  
+	component PLLpantalla is
+		port( inclk0 :in std_logic;
+			C0 : out std_logic);
+      end component;
+	component imagen is
+      port( CLK0,RESET0 :in std_logic;
+            CONT_H, CONT_V: in integer;
+            ROJO,VERDE,AZUL:out std_logic_vector (7 downto 0));
+    end component;
+
+  begin
+    
+    VGA_SYNC  <= '1';
+    VGA_BLANK <= '1';
+	RESET <= KEY(0);
+    U: PLLpantalla port map (CLOCK_50,C);
+    V: imagen port map(C,RESET,h_cnt,v_cnt,red_signal,green_signal,blue_signal);
+	
+--	  process(CLK)
+--		  begin
+--		    if (CLK = '1' and CLK'EVENT) then
+--			       FFD1 <= KEY3;
+--			       FFD2 <= FFD1;
+--			       FFD3 <= FFD2;
+--		    end if;
+--		    KEYaux <= not(not(FFD2) and FFD3);
+--	  end process;
+	
+    process(C,RESET)
+      variable cnt : integer;
+      begin
+          
+      if(reset = '0')then
+        cnt :=0;
+        hsync <='0';
+        vsync <='0';
+  --      color(0) <= (others => '0');
+  --      color(1) <= (others => '0');
+  --      color(2) <= (others => '0');
+		--  red_signal  <= (others => '0');
+      --  green_signal	 <= (others => '0');
+      --  blue_signal  <= (others => '0');
+
+        LEDR(17 downto 9) <= (others => '1');
+        h_cnt<=0;
+        v_cnt<=0;
+      elsif (C 'event and C = '1') then
+        LEDR(17 downto 9) <= (others => '0');
+        ---------------------------------------------
+        -- recoger las intensidades de los colores --
+        ---------------------------------------------
+--        if(KEYaux /= '1') then
+ --         color(cnt) <= SW;
+  --        cnt := cnt +1;
+  --        if (cnt > 3) then
+  ----            cnt := 0;
+	--			  color(0) <= (others => '0');
+	--			  color(1) <= (others => '0');
+	--			  color(2) <= (others => '0');
+   --       end if;
+  --      end if;
+        
+        ------------------------------------
+        -- generar se�ales de sincronismo --
+        ------------------------------------
+        --Sincronismo vertical
+	      IF (v_cnt < 1063  ) THEN
+		        vsync <= '1';
+       	ELSE
+		        vsync <= '0';
+	      END IF;
+        
+        ---- contador vectical
+	      IF (v_cnt = 1066) THEN
+		        v_cnt <= 0;
+	      ELSIF (h_cnt = 1688) THEN
+		        v_cnt <= v_cnt + 1;
+	      END IF;
+	      
+	      ---- contador horizontal
+        IF (h_cnt = 1688) THEN
+		          h_cnt <= 0;
+	      ELSE
+		          h_cnt <= h_cnt + 1;
+	      END IF;
+
+	      --Sincronismo horizontal
+	      IF (h_cnt < 1576) THEN
+		        hsync <= '1';
+	      ELSE
+		        hsync <= '0';
+	      END IF;
+		 
+      end if; --CLK reset  
+    end process;
+    VGA_CLK <= C;
+    VGA_HS <= hsync;
+    VGA_VS <= vsync;
+    VGA_R  <= red_signal;
+    VGA_G  <= green_signal;
+    VGA_B  <= blue_signal;
+  
+end uno;

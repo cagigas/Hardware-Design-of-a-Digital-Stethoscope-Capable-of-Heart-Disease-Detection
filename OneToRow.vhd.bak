@@ -1,0 +1,37 @@
+LIBRARY ieee;
+  USE ieee.std_logic_1164.all;
+  USE ieee.std_logic_unsigned.all;
+  USE ieee.std_logic_arith.all;
+  USE work.david.all;
+  
+ENTITY OneToRow IS
+	PORT(	CLKaux 				: IN STD_LOGIC;
+			datin				: IN integer range -127 to 128;		
+			datoS				: OUT ausculation1024
+	);
+END OneToRow;
+
+
+ARCHITECTURE behavior OF OneToRow IS
+	signal datoSS: ausculation1024;
+	
+--	signal dato : datas;
+	
+	begin
+	
+	datoS<=datoSS;
+	
+	process(CLKaux)
+		
+		begin
+		if ((CLKaux'event and CLKaux = '1')) then
+		
+					datoSS <= datoSS(1022 downto 0)&datin;
+		
+		
+		end if;
+		
+	end process;
+	
+	
+end behavior;--

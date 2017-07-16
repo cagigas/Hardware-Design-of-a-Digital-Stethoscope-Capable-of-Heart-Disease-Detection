@@ -1,0 +1,34 @@
+--LIBRARY ieee;
+--USE ieee.std_logic_1164.all;
+--USE ieee.std_logic_signed.all;
+--
+--ENTITY filter IS
+--	PORT(	CLOCK_50											: IN STD_LOGIC;
+--			datain												: IN STD_LOGIC_VECTOR(23 downto 0);
+--			dataout												: OUT STD_LOGIC_VECTOR(23 downto 0);
+--	);
+--END sonido;
+--
+--ARCHITECTURE Behavior OF sonido IS
+--
+--	COMPONENT filter is
+--		port (	clk 		: IN  std_logic;
+--				datain
+--				dataout 	: OUT integer range -128 to 127
+--		);
+--	END COMPONENT;
+--	
+--	SIGNAL read_ready, write_ready, read_s, write_s				:STD_LOGIC;
+--BEGIN
+--	reset <= NOT(KEY);
+----	LEDR(3) <= read_ready;
+----	LEDR(4) <= write_ready;
+--	
+--	process(CLOCK_50, reset)
+--		variable contador: integer;
+--		begin
+--		if reset = '1' then
+--			LEDR(0) <= '1';
+--			read_s <= '0';
+--
+--END Behavior;

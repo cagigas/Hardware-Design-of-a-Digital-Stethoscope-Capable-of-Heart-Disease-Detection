@@ -1,0 +1,15 @@
+PLL_Name	Display:DISP|Main:PICT|Picture:PICT|PLLSound:PLL|altpll:altpll_component|PLLSound_altpll1:auto_generated|pll1
+PLLJITTER	30
+PLLSPEmax	84
+PLLSPEmin	-53
+
+PLL_Name	Display:DISP|PLLpantalla:PLLS|altpll:altpll_component|PLLpantalla_altpll:auto_generated|pll1
+PLLJITTER	31
+PLLSPEmax	84
+PLLSPEmin	-53
+
+PLL_Name	Sound:SOUN|clock_generator:my_clock_gen|altpll:DE_Clock_Generator_Audio|pll
+PLLJITTER	45
+PLLSPEmax	84
+PLLSPEmin	-53
+

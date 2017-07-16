@@ -1,0 +1,63 @@
+LIBRARY ieee;
+  USE ieee.std_logic_1164.all;
+  USE ieee.std_logic_unsigned.all;
+  USE ieee.std_logic_arith.all;
+  
+ENTITY sthetoscope1 IS
+	PORT(	CLKaux 							: IN STD_LOGIC;
+			datosin							: IN INTEGER;
+			datos1,datos2,datos3			: OUT INTEGER;
+	);
+END sthetoscope1;
+
+ARCHITECTURE behavior OF sthetoscope1 IS
+  
+--  type colores is array (2 downto 0) of std_logic_vector(7 downto 0);
+--  signal color : colores; 
+--  signal KEYaux: std_logic; 
+	signal hsync, vsync	:	std_logic;
+	signal red_signal,	green_signal, blue_signal	: std_logic_vector (7 downto 0);
+	signal h_cnt, v_cnt : integer;
+	signal FFD1,FFD2,FFD3	:	std_logic;
+	signal C: std_logic;
+	signal prueba: integer;
+	signal RESET: std_logic;
+  
+
+
+
+
+
+
+	process(CLKaux)
+		
+		begin
+		
+
+		--if(RESET0 = '0')then
+		if ((CLKaux'event and CLKaux = '1')) then
+			
+			aux23<=not(aux23);
+			HEX0(3 downto 0) <= aux23;
+			--data(9 downto 0) <= datoS & data(9 downto 1);
+			datoS2 <= datoS;
+			datoS3 <= datoS2;
+			datoS4 <= datoS3;
+			datoS5 <= datoS4;
+			datoS6 <= datoS5;
+			datoS7 <= datoS6;
+			datoS8 <= datoS7;
+			datoS9 <= datoS8;
+						--datoS3 <= 0;
+--		elsif((CLKaux'event and CLKaux='0')) then
+--
+--			aux23<=not(aux23);
+--			HEX0(3 downto 0) <= aux23;
+--				--data(9 downto 0) <= datoS & data(9 downto 1);
+--			datoS2 <= datoS;
+--			--datoS3 <= 0;
+		end if;
+		
+	end process;
+	
+end behavior;

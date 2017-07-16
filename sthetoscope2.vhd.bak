@@ -1,0 +1,37 @@
+LIBRARY ieee;
+  USE ieee.std_logic_1164.all;
+  USE ieee.std_logic_unsigned.all;
+  USE ieee.std_logic_arith.all;
+  USE work.david.all;
+  
+ENTITY sthetoscope2 IS
+	PORT(	CLKaux 				: IN STD_LOGIC;
+			datin				: IN integer range -127 to 128;		
+			datoS				: OUT ausculation1000
+	);
+END sthetoscope2;
+
+
+ARCHITECTURE behavior OF sthetoscope2 IS
+	signal datoSS: ausculation1000;
+	
+--	signal dato : datas;
+	
+	begin
+	
+	datoS<=datoSS;
+	
+	process(CLKaux)
+		
+		begin
+		if ((CLKaux'event and CLKaux = '1')) then
+		
+					datoSS <= datoSS(98 downto 0)&datin;
+		
+		
+		end if;
+		
+	end process;
+	
+	
+end behavior;--

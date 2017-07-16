@@ -1,0 +1,121 @@
+set_location_assignment PIN_M21 -to KEY3
+set_location_assignment PIN_M23 -to RESET
+set_instance_assignment -name IO_STANDARD "2.5 V" -to RESET
+set_location_assignment PIN_G19 -to LEDR[0]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to LEDR[0]
+set_location_assignment PIN_AB25 -to SW[9]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to SW[9]
+set_location_assignment PIN_AC25 -to SW[8]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to SW[8]
+set_location_assignment PIN_AB26 -to SW[7]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to SW[7]
+set_location_assignment PIN_AD26 -to SW[6]
+set_location_assignment PIN_AC26 -to SW[5]
+set_location_assignment PIN_AB27 -to SW[4]
+set_location_assignment PIN_AD27 -to SW[3]
+set_location_assignment PIN_AC27 -to SW[2]
+set_location_assignment PIN_AC28 -to SW[1]
+set_location_assignment PIN_AB28 -to SW[0]
+set_location_assignment PIN_D12 -to VGA_B[7]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_B[7]
+set_location_assignment PIN_D11 -to VGA_B[6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_B[6]
+set_location_assignment PIN_C12 -to VGA_B[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_B[5]
+set_location_assignment PIN_A11 -to VGA_B[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_B[4]
+set_location_assignment PIN_B11 -to VGA_B[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_B[3]
+set_location_assignment PIN_C11 -to VGA_B[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_B[2]
+set_location_assignment PIN_A10 -to VGA_B[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_B[1]
+set_location_assignment PIN_B10 -to VGA_B[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_B[0]
+set_location_assignment PIN_A12 -to VGA_CLK
+set_location_assignment PIN_C9 -to VGA_G[7]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_G[7]
+set_location_assignment PIN_F10 -to VGA_G[6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_G[6]
+set_location_assignment PIN_B8 -to VGA_G[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_G[5]
+set_location_assignment PIN_C8 -to VGA_G[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_G[4]
+set_location_assignment PIN_H12 -to VGA_G[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_G[3]
+set_location_assignment PIN_F8 -to VGA_G[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_G[2]
+set_location_assignment PIN_G11 -to VGA_G[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_G[1]
+set_location_assignment PIN_G8 -to VGA_G[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_G[0]
+set_location_assignment PIN_G13 -to VGA_HS
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_HS
+set_location_assignment PIN_H10 -to VGA_R[7]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_R[7]
+set_location_assignment PIN_H8 -to VGA_R[6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_R[6]
+set_location_assignment PIN_J12 -to VGA_R[5]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_R[5]
+set_location_assignment PIN_G10 -to VGA_R[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_R[4]
+set_location_assignment PIN_F12 -to VGA_R[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_R[3]
+set_location_assignment PIN_D10 -to VGA_R[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_R[2]
+set_location_assignment PIN_E11 -to VGA_R[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_R[1]
+set_location_assignment PIN_E12 -to VGA_R[0]
+set_location_assignment PIN_C13 -to VGA_VS
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_VS
+set_location_assignment PIN_F19 -to LEDR[1]
+set_location_assignment PIN_E19 -to LEDR[2]
+set_location_assignment PIN_F21 -to LEDR[3]
+set_location_assignment PIN_F18 -to LEDR[4]
+set_location_assignment PIN_E18 -to LEDR[5]
+set_location_assignment PIN_J19 -to LEDR[6]
+set_location_assignment PIN_H19 -to LEDR[7]
+set_location_assignment PIN_J17 -to LEDR[8]
+set_location_assignment PIN_G17 -to LEDR[9]
+set_location_assignment PIN_J15 -to LEDR[10]
+set_location_assignment PIN_H16 -to LEDR[11]
+set_location_assignment PIN_J16 -to LEDR[12]
+set_location_assignment PIN_H17 -to LEDR[13]
+set_location_assignment PIN_F15 -to LEDR[14]
+set_location_assignment PIN_G15 -to LEDR[15]
+set_location_assignment PIN_G16 -to LEDR[16]
+set_location_assignment PIN_H15 -to LEDR[17]
+set_location_assignment PIN_Y2 -to CLK
+set_location_assignment PIN_F11 -to VGA_BLANK
+set_location_assignment PIN_C10 -to VGA_SYNC
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_BLANK
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_CLK
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_R[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to VGA_SYNC
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
+set_global_assignment -name FAMILY "Cyclone IV E"
+set_global_assignment -name DEVICE EP4CE115F29C7
+set_global_assignment -name TOP_LEVEL_ENTITY Project
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 10.0
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "16:44:38  OCTOBER 23, 2012"
+set_global_assignment -name LAST_QUARTUS_VERSION 10.0
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 1
+set_global_assignment -name NOMINAL_CORE_SUPPLY_VOLTAGE 1.2V
+set_global_assignment -name VHDL_FILE Project.vhd
+set_global_assignment -name QIP_FILE PLL.qip
+set_global_assignment -name IP_TOOL_NAME ALTPLL -qip PLL.qip
+set_global_assignment -name IP_TOOL_VERSION 10.0 -qip PLL.qip
+set_global_assignment -name VHDL_FILE PLL.vhd -qip PLL.qip
+set_global_assignment -name MISC_FILE PLL.bsf -qip PLL.qip
+set_global_assignment -name MISC_FILE PLL_inst.vhd -qip PLL.qip
+set_global_assignment -name MISC_FILE PLL.inc -qip PLL.qip
+set_global_assignment -name MISC_FILE PLL.cmp -qip PLL.qip
+set_global_assignment -name MISC_FILE PLL.ppf -qip PLL.qip
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "2.5 V"
+set_global_assignment -name MISC_FILE "C:/Users/David/Desktop/PFC IT/Proyecto/Project.dpf"
+set_global_assignment -name SOURCE_FILE AsignacionPines.csv

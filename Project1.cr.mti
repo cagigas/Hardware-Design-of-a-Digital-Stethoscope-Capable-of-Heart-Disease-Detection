@@ -1,0 +1,32 @@
+{C:/Users/David/Desktop/PFC IT/Proyecto/test_bench.vhd} {0 {vcom -work work -2002 -explicit {C:/Users/David/Desktop/PFC IT/Proyecto/test_bench.vhd}
+Model Technology ModelSim ALTERA vcom 6.5e Compiler 2010.02 Feb 27 2010
+-- Loading package standard
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package std_logic_unsigned
+-- Compiling entity test_bench
+-- Compiling architecture only of test_bench
+** Error: C:/Users/David/Desktop/PFC IT/Proyecto/test_bench.vhd(30): (vcom-1141) Identifier "project" does not identify a component declaration.
+** Error: C:/Users/David/Desktop/PFC IT/Proyecto/test_bench.vhd(51): VHDL Compiler exiting
+
+} {9.0 11.0} {}} {C:/Users/David/Desktop/PFC IT/Proyecto/Project1/Project1.vhd} {0 {vcom -work work -2002 -explicit {C:/Users/David/Desktop/PFC IT/Proyecto/Project1/Project1.vhd}
+Model Technology ModelSim ALTERA vcom 6.5e Compiler 2010.02 Feb 27 2010
+-- Loading package standard
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package std_logic_unsigned
+-- Compiling entity project1
+** Error: (vcom-1935) Unable to move temporary file C:\Users\David\Desktop\PFC IT\Proyecto\Project1/_temp/vlogd7ydmn to C:\Users\David\Desktop\PFC IT\Proyecto\Project1/project1/_primary.dbs.
+Invalid argument. (errno = EINVAL)
+** Error: (vcom-1935) Unable to move temporary file C:\Users\David\Desktop\PFC IT\Proyecto\Project1/_temp/vcomd7ydmn to C:\Users\David\Desktop\PFC IT\Proyecto\Project1/project1/_primary.dat.
+Invalid argument. (errno = EINVAL)
+** Error: C:/Users/David/Desktop/PFC IT/Proyecto/Project1/Project1.vhd(14): VHDL Compiler exiting
+
+} {8.0 9.0 10.0 11.0 12.0 13.0} {}} {C:/Users/David/Desktop/PFC IT/Proyecto/PLL.vhd} {1 {vcom -work work -2002 -explicit {C:/Users/David/Desktop/PFC IT/Proyecto/PLL.vhd}
+Model Technology ModelSim ALTERA vcom 6.5e Compiler 2010.02 Feb 27 2010
+-- Loading package standard
+-- Loading package std_logic_1164
+-- Compiling entity pll
+-- Compiling architecture syn of pll
+
+} {} {}}

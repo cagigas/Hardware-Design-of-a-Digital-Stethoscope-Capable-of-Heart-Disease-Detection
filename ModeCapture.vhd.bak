@@ -1,0 +1,131 @@
+LIBRARY ieee;
+	USE ieee.std_logic_1164.all;
+	USE ieee.std_logic_unsigned.all;
+	USE ieee.numeric_std.all;
+	USE work.david.all;
+  
+ENTITY ModeCapture IS
+	GENERIC(	VERTICAL			: NATURAL;
+				HORIZONTAL			: NATURAL
+	);
+	PORT(		CLOCK_108M 			: IN STD_LOGIC;
+				CONT_H, CONT_V		: IN INTEGER;
+				DATAIN				: IN ausculation1000;
+				ROJO,VERDE,AZUL	: OUT STD_LOGIC_VECTOR(7 downto 0)
+	);
+END ModeCapture;
+
+ARCHITECTURE behavior OF ModeCapture IS
+	signal Position	: INTEGER RANGE 0 to 999;
+	signal Value256,ValueReal,ValueRealNext: INTEGER RANGE -127 to 128;
+	signal DATAIN2: ausculation1000;
+	signal RedBt1, GreenBt1, BlueBt1	: STD_LOGIC_VECTOR(7 downto 0);
+	signal RedBt2, GreenBt2, BlueBt2	: STD_LOGIC_VECTOR(7 downto 0);
+	signal RedBt3, GreenBt3, BlueBt3	: STD_LOGIC_VECTOR(7 downto 0);
+	signal RedBt4, GreenBt4, BlueBt4	: STD_LOGIC_VECTOR(7 downto 0);
+	signal RedFrDown, GreenFrDown, BlueFrDown	: STD_LOGIC_VECTOR(7 downto 0);
+
+	
+	COMPONENT Frequency IS
+		GENERIC( VERTICAL				: NATURAL;
+					HORIZONTAL			: NATURAL
+		);
+		PORT(		CLOCK_108M 			: IN STD_LOGIC;
+					CONT_H, CONT_V		: IN INTEGER;
+					NUMBER				: IN INTEGER;
+					ROJO,VERDE,AZUL	: OUT STD_LOGIC_VECTOR(7 downto 0)
+		);
+	END COMPONENT;
+	COMPONENT Button IS
+		GENERIC( 	VERTICAL			: NATURAL;
+					HORIZONTAL			: NATURAL
+		);
+		PORT(		CLOCK_108M 			: IN STD_LOGIC;
+					CONT_H, CONT_V		: IN INTEGER;
+					ROJO,VERDE,AZUL	: OUT STD_LOGIC_VECTOR(7 downto 0)
+		);
+	END COMPONENT;
+	
+	begin
+	BT1: Button GENERIC MAP (970,1290)PORT MAP (CLOCK_108M,CONT_H, CONT_V, RedBt1, GreenBt1, BlueBt1);
+	BT2: Button GENERIC MAP (970,1335)PORT MAP (CLOCK_108M,CONT_H, CONT_V, RedBt2, GreenBt2, BlueBt2);
+	BT3: Button GENERIC MAP (970,1380)PORT MAP (CLOCK_108M,CONT_H, CONT_V, RedBt3, GreenBt3, BlueBt3);
+	BT4: Button GENERIC MAP (970,1425)PORT MAP (CLOCK_108M,CONT_H, CONT_V, RedBt4, GreenBt4, BlueBt4);
+	PFD: Frequency GENERIC MAP (549,786)PORT MAP (CLOCK_108M,CONT_H, CONT_V, 76, RedFrDown, GreenFrDown, BlueFrDown);
+
+	
+	Position <= CONT_H - HORIZONTAL;
+	Value256 <= CONT_V - VERTICAL - 127;
+	process(CLOCK_108M)
+		begin
+		if KEY(3)='0' then
+			DATAIN2<=DATAIN;
+		end if;
+			
+	end process;
+	
+		process(CLOCK_108M)
+			begin
+			if (KEY(0)='0')then
+				DATAIN2<=(others=>'1');
+			elsif ((CLOCK_108M'event and CLOCK_108M = '1')) then
+				if ((CONT_V > VERTICAL-1) and (CONT_V < VERTICAL + 256))then --669,926
+					if ((CONT_H > HORIZONTAL-1) and (CONT_H < HORIZONTAL + 1000)) then
+						if DATAIN2(Position) = Value256 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							ROJO  <= (others => '0');
+							VERDE <= (others => '0');
+							AZUL  <= (others => '0');
+						end if;
+					end if;
+				elsif((CONT_V > 548) and (CONT_V < 649))then	--Frecuency Down
+					if((CONT_H = 253) or (CONT_H = 254) or (CONT_H = 1527) or (CONT_H = 1528)) then 
+						ROJO  <= (others => '1');
+						VERDE <= (others => '1');
+						AZUL  <= (others => '1');
+					elsif ((CONT_H > 785) and (CONT_H < 996)) then 
+						ROJO <= RedFrDown;
+						VERDE <= GreenFrDown;
+						AZUL <= BlueFrDown;	
+					else 
+						ROJO  <= (others => '0');
+						VERDE <= (others => '0');
+						AZUL  <= (others => '0');
+					end if;
+
+				elsif (CONT_V > 969) and (CONT_V < 1010) then	-- Buttons
+					if ((CONT_H = 253) or (CONT_H = 254) or (CONT_H = 1527) or (CONT_H = 1528)) then 
+						ROJO  <= (others => '1');
+						VERDE <= (others => '1');
+						AZUL  <= (others => '1');
+					elsif ((CONT_H > 1289) and (CONT_H < 1331)) then	-- Button 1
+						ROJO <= RedBt1;
+						VERDE <= GreenBt1;
+						AZUL <= BlueBt1;
+					elsif ((CONT_H > 1334) and (CONT_H < 1376)) then	-- Button 2
+						ROJO <= RedBt2;
+						VERDE <= GreenBt2;
+						AZUL <= BlueBt2;
+					elsif ((CONT_H > 1379) and (CONT_H < 1421)) then	-- Button 3
+						ROJO <= RedBt3;
+						VERDE <= GreenBt3;
+						AZUL <= BlueBt3;
+					elsif ((CONT_H > 1424) and (CONT_H < 1466)) then	-- Button 4
+						ROJO <= RedBt4;
+						VERDE <= GreenBt4;
+						AZUL <= BlueBt4;
+					else 
+						ROJO  <= (others => '0');
+						VERDE <= (others => '0');
+						AZUL  <= (others => '0');
+					end if;
+
+				end if;
+			end if;
+	 
+	end process;
+	
+end behavior;--

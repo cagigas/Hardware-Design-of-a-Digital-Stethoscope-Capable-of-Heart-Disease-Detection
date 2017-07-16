@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<LOG_ROOT>
+	<PROJECT NAME="Project">
+		<CBX_INST_ENTRY INSTANCE_NAME="|Project|Display:DISP|Main:PICT|Picture:PICT|CheckSignalDown:CSD|ModeAutomaticSelect:MAU|ModeAutomatic:MAU|Button:BT4|lpm_mult:Mult0" CBX_FILE_NAME="mult_33t.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Project|Sound:SOUN|audio_codec:codec|Altera_UP_Audio_Out_Serializer:Audio_Out_Serializer|Altera_UP_SYNC_FIFO:Audio_Out_Left_Channel_FIFO|scfifo:Sync_FIFO" CBX_FILE_NAME="scfifo_o441.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Project|Display:DISP|Main:PICT|Picture:PICT|CheckSignalDown:CSD|ModeAutomaticSelect:MAU|ModeAutomatic:MAU|Button:BT4|lpm_mult:Mult1" CBX_FILE_NAME="mult_33t.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Project|Display:DISP|Main:PICT|Picture:PICT|CheckSignalDown:CSD|ModeDataBase:MDB|RomSignal2PApexMid:ROMA7|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_ee32.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Project|Display:DISP|Main:PICT|Picture:PICT|Frequency:PFU|lpm_mult:Mult0" CBX_FILE_NAME="mult_58t.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Project|Display:DISP|Main:PICT|Picture:PICT|CheckSignalDown:CSD|ModeDataBase:MDB|RomSignal2PDuctoArterioso:ROMA10|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_bn42.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Project|Display:DISP|Main:PICT|Picture:PICT|lpm_divide:Div0" CBX_FILE_NAME="lpm_divide_92p.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Project|Sound:SOUN|audio_codec:codec|Altera_UP_Audio_In_Deserializer:Audio_In_Deserializer|Altera_UP_SYNC_FIFO:Audio_In_Right_Channel_FIFO|scfifo:Sync_FIFO" CBX_FILE_NAME="scfifo_o441.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Project|Sound:SOUN|audio_codec:codec|Altera_UP_Audio_Out_Serializer:Audio_Out_Serializer|Altera_UP_SYNC_FIFO:Audio_Out_Right_Channel_FIFO|scfifo:Sync_FIFO" CBX_FILE_NAME="scfifo_o441.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Project|Display:DISP|Main:PICT|Picture:PICT|CheckSignalDown:CSD|ModeAutomaticSelect:MAU|RomSignal2PDuctoArterioso:ROM2|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_bn42.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Project|Display:DISP|Main:PICT|Picture:PICT|CheckSignalDown:CSD|ModeDataBase:MDB|RomSignal2PSys:ROMA3|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_7m32.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Project|Display:DISP|Main:PICT|MainImage:MAIN|ROM1PMainImageBN:ROMI|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_2o91.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Project|Display:DISP|Main:PICT|Picture:PICT|CheckSignalDown:CSD|ModeAutomaticSelect:MAU|ModeAutomatic:MAU|Button:BT1|lpm_mult:Mult0" CBX_FILE_NAME="mult_33t.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Project|Display:DISP|Main:PICT|Picture:PICT|CheckSignalDown:CSD|ModeAutomaticSelect:MAU|RomSignal2PSys:ROM3|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_7m32.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Project|Display:DISP|Main:PICT|Picture:PICT|CheckSignalDown:CSD|ModeDataBase:MDB|RomSignal2PA1:ROMA1|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_9a32.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Project|Display:DISP|Main:PICT|Picture:PICT|CheckSignalDown:CSD|ModeDataBase:MDB|RomSignal2PDias:ROMA2|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_9o32.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Project|Display:DISP|Main:PICT|Picture:PICT|Frequency:PFU|lpm_divide:Div0" CBX_FILE_NAME="lpm_divide_s0p.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Project|Display:DISP|Main:PICT|Picture:PICT|PLLSound:PLL|altpll:altpll_component" CBX_FILE_NAME="PLLSound_altpll1.v"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Project|Display:DISP|Main:PICT|Picture:PICT|CheckSignalDown:CSD|ModeAutomaticSelect:MAU|ModeAutomatic:MAU|Button:BT2|lpm_mult:Mult0" CBX_FILE_NAME="mult_33t.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Project|Display:DISP|Main:PICT|Picture:PICT|CheckSignalDown:CSD|ModeAutomaticSelect:MAU|RomSignal2PA1:ROM1|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_9a32.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Project|Display:DISP|Main:PICT|Picture:PICT|CheckSignalDown:CSD|ModeCapture:MCA|RAMCapture:RAM|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_24g2.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Project|Display:DISP|Main:PICT|Picture:PICT|CheckSignalDown:CSD|ModeDataBase:MDB|RomSignal2PApexEarly:ROMA9|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_hl32.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Project|Display:DISP|Main:PICT|Picture:PICT|CheckSignalDown:CSD|ModeDataBase:MDB|RomSignal2PApexLate:ROMA8|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_qh32.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Project|Display:DISP|Main:PICT|Picture:PICT|CheckSignalDown:CSD|ModeDataBase:MDB|RomSignal2PSysDias:ROMA4|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_8342.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Project|Display:DISP|Main:PICT|Picture:PICT|Frequency:PFU|lpm_divide:Div1" CBX_FILE_NAME="lpm_divide_p0p.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Project|Display:DISP|Main:PICT|MainImage:MAIN|lpm_mult:Mult0" CBX_FILE_NAME="mult_e9t.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Project|Display:DISP|Main:PICT|Picture:PICT|CheckSignalDown:CSD|ModeAutomaticSelect:MAU|ModeAutomatic:MAU|Button:BT3|lpm_mult:Mult0" CBX_FILE_NAME="mult_33t.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Project|Display:DISP|Main:PICT|Picture:PICT|CheckSignalDown:CSD|ModeDataBase:MDB|RomSignal2PApexHolo:ROMA5|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_3l32.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Project|Display:DISP|Main:PICT|Picture:PICT|CheckSignalDown:CSD|ModeDataBase:MDB|RomSignal2PApexNormal:ROMA6|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_l332.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Project|Display:DISP|PLLpantalla:PLLS|altpll:altpll_component" CBX_FILE_NAME="PLLpantalla_altpll.v"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Project|Sound:SOUN|audio_codec:codec|Altera_UP_Audio_In_Deserializer:Audio_In_Deserializer|Altera_UP_SYNC_FIFO:Audio_In_Left_Channel_FIFO|scfifo:Sync_FIFO" CBX_FILE_NAME="scfifo_o441.tdf"/>
+	</PROJECT>
+</LOG_ROOT>

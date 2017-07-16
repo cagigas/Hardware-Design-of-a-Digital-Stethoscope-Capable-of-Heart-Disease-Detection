@@ -1,0 +1,68 @@
+ LIBRARY ieee;
+  USE ieee.std_logic_1164.all;
+  USE ieee.std_logic_unsigned.all;
+	use ieee.numeric_std.all;
+  USE work.david.all;
+  
+ENTITY Frequency IS
+	GENERIC( VERTICAL				: NATURAL;
+				HORIZONTAL			: NATURAL
+	);
+	PORT(		CLOCK_108M 			: IN STD_LOGIC;
+				CONT_H, CONT_V		: IN INTEGER;
+				NUMBER				: IN INTEGER;
+				ROJO,VERDE,AZUL	: OUT STD_LOGIC_VECTOR(7 downto 0)
+	);
+END Frequency;
+
+ARCHITECTURE behavior OF Frequency IS
+	signal X	: INTEGER RANGE 0 to 199;
+	signal Y	: INTEGER RANGE 0 to 99;
+
+--	COMPONENT PrintFrec IS
+--		GENERIC( VERTICAL				: NATURAL;
+--					HORIZONTAL			: NATURAL
+--		);
+--		PORT(		CLOCK_108M 			: IN STD_LOGIC;
+--					CONT_H, CONT_V		: IN INTEGER;
+--					NUMBER				: IN INTEGER;
+--					ROJO,VERDE,AZUL	: OUT STD_LOGIC_VECTOR(7 downto 0)
+--		);
+--	END COMPONENT;
+
+	begin
+--	PFR: PrintFrec GENERIC MAP (VERTICAL,HORIZONTAL)PORT MAP (CLOCK_108M,CONT_H, CONT_V, to_integer(unsigned(SW)), RedFr, GreenFr, BlueFr);
+	X <= CONT_H - HORIZONTAL;
+	Y <= CONT_V - VERTICAL;
+
+	process(CLOCK_108M)
+		begin
+			if ((CLOCK_108M'event and CLOCK_108M = '1')) then
+				
+				
+			if((CONT_V > 460) and (CONT_V < 511))then--Frecuency
+				if((CONT_H = 253) or (CONT_H = 254) or (CONT_H = 1527) or (CONT_H = 1528)) then 
+						ROJO  <= (others => '1');
+						VERDE <= (others => '1');
+						AZUL  <= (others => '1');
+				elsif (((X-100)*(X-100)+(Y+100)*(Y+100) >= 100000 ) or ((X-100)*(X-100)+(Y+100)*(Y+100) <= 200000 )) then 
+--						ROJO <= RedFr;
+--						VERDE <= GreenFr;
+--						AZUL <= BlueFr;
+						ROJO  <= (others => '1');
+						VERDE <= (others => '1');
+						AZUL  <= (others => '1');
+
+				else 
+						ROJO  <= (others => '0');
+						VERDE <= (others => '0');
+						AZUL  <= (others => '0');
+				end if;
+
+			end if;
+				
+			end if;
+			
+	end process;
+	
+end behavior;--

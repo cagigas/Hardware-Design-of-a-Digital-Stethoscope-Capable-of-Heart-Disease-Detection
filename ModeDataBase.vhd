@@ -1,0 +1,298 @@
+LIBRARY ieee;
+	USE ieee.std_logic_1164.all;
+	USE ieee.std_logic_unsigned.all;
+	USE ieee.numeric_std.all;
+	USE work.david.all;
+  
+ENTITY ModeDataBase IS
+	GENERIC(	VERTICAL			: NATURAL;
+				HORIZONTAL			: NATURAL
+	);
+	PORT(		CLOCK_108M 			: IN STD_LOGIC;
+				KEY					: IN STD_LOGIC_VECTOR(3 downto 0);
+				CONT_H, CONT_V		: IN INTEGER;
+				ROJO,VERDE,AZUL	: OUT STD_LOGIC_VECTOR(7 downto 0)
+	);
+END ModeDataBase;
+
+ARCHITECTURE generador OF ModeDataBase IS
+	TYPE FSMStates IS (state0, state1, state2, state3, state4, state5, state6, state7, state8, state9);
+	SIGNAL state : FSMStates := state0;
+	signal q_a,q_b,q_a_no,q_b_no,q_a_di,q_b_di,q_a_sy,q_b_sy,q_a_sd,q_b_sd : STD_LOGIC_VECTOR (7 DOWNTO 0);
+	signal q_a1,q_b1,q_a2,q_b2,q_a3,q_b3,q_a4,q_b4,q_a5,q_b5,q_a6,q_b6 : STD_LOGIC_VECTOR (7 DOWNTO 0);
+
+	signal sickness: integer range 0 to 9;
+
+	signal addr_a,addr_b: std_logic_vector(9 downto 0);
+	signal Position	: INTEGER RANGE 0 to 999;
+	
+	COMPONENT DataBaseSignal IS
+		GENERIC(	VERTICAL			: NATURAL;
+					HORIZONTAL			: NATURAL
+		);
+		PORT(		CLOCK_108M 			: IN STD_LOGIC;
+					KEY					: IN STD_LOGIC_VECTOR(3 downto 0);
+					CONT_H, CONT_V,sickness		: IN INTEGER;
+					q_a,q_b				: IN STD_LOGIC_VECTOR (7 DOWNTO 0);
+					ROJO,VERDE,AZUL	: OUT STD_LOGIC_VECTOR(7 downto 0)
+		);
+	END COMPONENT;
+
+	COMPONENT RomSignal2PA1 IS--Signal Simple
+		PORT
+		(
+			address_a		: IN STD_LOGIC_VECTOR (9 DOWNTO 0);
+			address_b		: IN STD_LOGIC_VECTOR (9 DOWNTO 0);
+			clock		: IN STD_LOGIC  := '1';
+			q_a		: OUT STD_LOGIC_VECTOR (7 DOWNTO 0);
+			q_b		: OUT STD_LOGIC_VECTOR (7 DOWNTO 0)
+		);
+	END COMPONENT;
+	
+	COMPONENT RomSignal2PDias IS
+	PORT
+	(
+		address_a		: IN STD_LOGIC_VECTOR (9 DOWNTO 0);
+		address_b		: IN STD_LOGIC_VECTOR (9 DOWNTO 0);
+		clock			: IN STD_LOGIC  := '1';
+		q_a				: OUT STD_LOGIC_VECTOR (7 DOWNTO 0);
+		q_b				: OUT STD_LOGIC_VECTOR (7 DOWNTO 0)
+	);
+	END COMPONENT;
+
+	COMPONENT RomSignal2PSys IS
+	PORT
+	(
+		address_a		: IN STD_LOGIC_VECTOR (9 DOWNTO 0);
+		address_b		: IN STD_LOGIC_VECTOR (9 DOWNTO 0);
+		clock		: IN STD_LOGIC  := '1';
+		q_a		: OUT STD_LOGIC_VECTOR (7 DOWNTO 0);
+		q_b		: OUT STD_LOGIC_VECTOR (7 DOWNTO 0)
+	);
+	END COMPONENT;
+	
+	COMPONENT RomSignal2PSysDias IS
+	PORT
+	(
+		address_a		: IN STD_LOGIC_VECTOR (9 DOWNTO 0);
+		address_b		: IN STD_LOGIC_VECTOR (9 DOWNTO 0);
+		clock		: IN STD_LOGIC  := '1';
+		q_a		: OUT STD_LOGIC_VECTOR (7 DOWNTO 0);
+		q_b		: OUT STD_LOGIC_VECTOR (7 DOWNTO 0)
+	);
+	END COMPONENT;
+	COMPONENT RomSignal2PApexHolo IS
+		PORT
+		(
+			address_a		: IN STD_LOGIC_VECTOR (9 DOWNTO 0);
+			address_b		: IN STD_LOGIC_VECTOR (9 DOWNTO 0);
+			clock		: IN STD_LOGIC  := '1';
+			q_a		: OUT STD_LOGIC_VECTOR (7 DOWNTO 0);
+			q_b		: OUT STD_LOGIC_VECTOR (7 DOWNTO 0)
+		);
+	END COMPONENT;
+	COMPONENT RomSignal2PApexNormal IS
+		PORT
+		(
+			address_a		: IN STD_LOGIC_VECTOR (9 DOWNTO 0);
+			address_b		: IN STD_LOGIC_VECTOR (9 DOWNTO 0);
+			clock		: IN STD_LOGIC  := '1';
+			q_a		: OUT STD_LOGIC_VECTOR (7 DOWNTO 0);
+			q_b		: OUT STD_LOGIC_VECTOR (7 DOWNTO 0)
+		);
+	END COMPONENT;
+	COMPONENT RomSignal2PApexMid IS
+		PORT
+		(
+			address_a		: IN STD_LOGIC_VECTOR (9 DOWNTO 0);
+			address_b		: IN STD_LOGIC_VECTOR (9 DOWNTO 0);
+			clock		: IN STD_LOGIC  := '1';
+			q_a		: OUT STD_LOGIC_VECTOR (7 DOWNTO 0);
+			q_b		: OUT STD_LOGIC_VECTOR (7 DOWNTO 0)
+		);
+	END COMPONENT;
+	COMPONENT RomSignal2PApexLate IS
+		PORT
+		(
+			address_a		: IN STD_LOGIC_VECTOR (9 DOWNTO 0);
+			address_b		: IN STD_LOGIC_VECTOR (9 DOWNTO 0);
+			clock		: IN STD_LOGIC  := '1';
+			q_a		: OUT STD_LOGIC_VECTOR (7 DOWNTO 0);
+			q_b		: OUT STD_LOGIC_VECTOR (7 DOWNTO 0)
+		);
+	END COMPONENT;
+	COMPONENT RomSignal2PApexEarly IS
+		PORT
+		(
+			address_a		: IN STD_LOGIC_VECTOR (9 DOWNTO 0);
+			address_b		: IN STD_LOGIC_VECTOR (9 DOWNTO 0);
+			clock		: IN STD_LOGIC  := '1';
+			q_a		: OUT STD_LOGIC_VECTOR (7 DOWNTO 0);
+			q_b		: OUT STD_LOGIC_VECTOR (7 DOWNTO 0)
+		);
+	END COMPONENT;
+	COMPONENT RomSignal2PDuctoArterioso IS
+		PORT
+		(
+			address_a		: IN STD_LOGIC_VECTOR (9 DOWNTO 0);
+			address_b		: IN STD_LOGIC_VECTOR (9 DOWNTO 0);
+			clock		: IN STD_LOGIC  := '1';
+			q_a		: OUT STD_LOGIC_VECTOR (7 DOWNTO 0);
+			q_b		: OUT STD_LOGIC_VECTOR (7 DOWNTO 0)
+		);
+	END COMPONENT;
+
+
+	BEGIN
+    DBS	: DataBaseSignal GENERIC MAP (670,391)PORT MAP (CLOCK_108M, KEY, CONT_H, CONT_V,sickness, q_a, q_b, ROJO, VERDE, AZUL);
+
+	ROMA1: RomSignal2PA1 PORT MAP (addr_a,addr_b,CLOCK_108M,q_a_no,q_b_no);
+	ROMA2: RomSignal2PDias PORT MAP (addr_a,addr_b,CLOCK_108M,q_a_di,q_b_di);
+	ROMA3: RomSignal2PSys PORT MAP (addr_a,addr_b,CLOCK_108M,q_a_sy,q_b_sy);
+	ROMA4: RomSignal2PSysDias PORT MAP (addr_a,addr_b,CLOCK_108M,q_a_sd,q_b_sd);
+	
+	ROMA5: RomSignal2PApexHolo PORT MAP (addr_a,addr_b,CLOCK_108M,q_a1,q_b1);
+	ROMA6: RomSignal2PApexNormal PORT MAP (addr_a,addr_b,CLOCK_108M,q_a2,q_b2);
+	ROMA7: RomSignal2PApexMid PORT MAP (addr_a,addr_b,CLOCK_108M,q_a3,q_b3);
+	ROMA8: RomSignal2PApexLate PORT MAP (addr_a,addr_b,CLOCK_108M,q_a4,q_b4);
+	ROMA9: RomSignal2PApexEarly PORT MAP (addr_a,addr_b,CLOCK_108M,q_a5,q_b5);
+
+	ROMA10:RomSignal2PDuctoArterioso PORT MAP (addr_a,addr_b,CLOCK_108M,q_a6,q_b6);
+	
+	Position <= CONT_H - HORIZONTAL;
+	addr_b <= std_logic_vector(to_unsigned(Position + 1,10));
+	addr_a <= std_logic_vector(to_unsigned(Position,10));
+
+	PROCESS (CLOCK_108M, KEY(0)) 
+		BEGIN
+        if(KEY(0)='0')then
+			state <= state0; 
+		elsif CLOCK_108M'event and CLOCK_108M='1' then
+
+			case state is
+				when state0 =>
+					sickness <= 0;
+					q_a <= q_a_no;
+					q_b <= q_b_no;
+					if (KEY(3)='0') then
+						state <= state1;
+					elsif (KEY(2)='0') then
+						state <= state9;
+					else
+						state <= state0;
+					end if;
+					
+				when state1 =>
+					sickness <= 1;
+					q_a <= q_a_di;
+					q_b <= q_b_di;
+					if (KEY(3)='0') then
+						state <= state2;
+					elsif (KEY(2)='0') then
+						state <= state0;
+					else
+						state <= state1;
+					end if;
+					
+				when state2 =>
+					sickness <= 2;
+					q_a <= q_a_sy;
+					q_b <= q_b_sy;
+					if (KEY(3)='0') then
+						state <= state3;
+					elsif (KEY(2)='0') then
+						state <= state1;
+					else
+						state <= state2;
+					end if;
+					
+				when state3 =>
+					sickness <= 3;
+					q_a <= q_a_sd;
+					q_b <= q_b_sd;
+					if (KEY(3)='0') then
+						state <= state4;
+					elsif (KEY(2)='0') then
+						state <= state2;
+					else
+						state <= state3;
+					end if;
+					
+				when state4 =>
+					sickness <= 4;
+					q_a <= q_a1;
+					q_b <= q_b1;
+					if (KEY(3)='0') then
+						state <= state5;
+					elsif (KEY(2)='0') then
+						state <= state3;
+					else
+						state <= state4;
+					end if;
+					
+				when state5 =>
+					sickness <= 5;
+					q_a <= q_a2;
+					q_b <= q_b2;
+					if (KEY(3)='0') then
+						state <= state6;
+					elsif (KEY(2)='0') then
+						state <= state4;
+					else
+						state <= state5;
+					end if;
+					
+				when state6 =>
+					sickness <= 6;
+					q_a <= q_a3;
+					q_b <= q_b3;
+					if (KEY(3)='0') then
+						state <= state7;
+					elsif (KEY(2)='0') then
+						state <= state5;
+					else
+						state <= state6;
+					end if;
+					
+				when state7 =>
+					sickness <= 7;
+					q_a <= q_a4;
+					q_b <= q_b4;
+					if (KEY(3)='0') then
+						state <= state8;
+					elsif (KEY(2)='0') then
+						state <= state6;
+					else
+						state <= state7;
+					end if;
+					
+				when state8 =>
+					sickness <= 8;
+					q_a <= q_a5;
+					q_b <= q_b5;
+					if (KEY(3)='0') then
+						state <= state9;
+					elsif (KEY(2)='0') then
+						state <= state7;
+					else
+						state <= state8;
+					end if;
+					
+				when state9 =>
+					sickness <= 9;
+					q_a <= q_a6;
+					q_b <= q_b6;
+					if (KEY(3)='0') then
+						state <= state0;
+					elsif (KEY(2)='0') then
+						state <= state8;
+					else
+						state <= state9;
+					end if;
+					
+			end case;
+		end if;
+	END PROCESS;
+	
+	
+end generador;

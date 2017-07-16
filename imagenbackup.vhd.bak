@@ -1,0 +1,396 @@
+library ieee;
+  use ieee.std_logic_1164.all;
+ -- use ieee.std_logic_unsigned.all;
+  use ieee.std_logic_signed.all;
+  use ieee.numeric_std.all;
+  
+entity imagen is
+	port(	CLK0,RESET0				: IN std_logic;
+			CLKaux					: in STD_LOGIC;
+
+			dato2					: IN STD_LOGIC_VECTOR(23 downto 0);
+			HEX0, HEX1, HEX2, HEX3	: OUT STD_LOGIC_VECTOR(6 downto 0); 
+
+			CONT_H, CONT_V			: IN integer;
+			ROJO,VERDE,AZUL			: OUT std_logic_vector (7 downto 0));
+end imagen;
+
+
+architecture generador of imagen is
+	signal A,B,C,D,E,F,contador: integer;
+	signal aux23: std_logic_vector(3 downto 0):="0000";
+	signal datoS,datoS2,datoS3: integer range 0 to 256;
+	type datas is array (9 downto 0) of integer range 0 to 256;
+	signal data : datas; 
+	begin
+--	COMPONENT display7 is
+--		port (
+--			clk : in std_logic;
+--			bcd : in std_logic_vector(3 downto 0);  --BCD input
+--			segment7 : out std_logic_vector(6 downto 0)  -- 7 bit decoded output.
+--		);
+--	end COMPONENT;
+	
+	
+	datoS <= to_integer(((signed(dato2))/(2**16)) + 297);
+	
+	process(CLKaux)
+		begin
+		if(RESET0='0')then
+		
+		elsif (CLKaux'event)then
+
+			aux23<=not(aux23);
+			HEX0(3 downto 0) <= aux23;
+				--data(9 downto 0) <= datoS & data(9 downto 1);
+			datoS2 <= datoS;
+			datoS3 <= datoS2;
+		end if;
+	end process;
+	
+	
+	process(CLK0)
+		begin  
+
+        if(RESET0='0')then
+			ROJO   <= (others => '0');
+			VERDE  <= (others => '0');
+			AZUL   <= (others => '0');
+			 A <= 422;
+			 B <= 426;
+			 C <= 422;
+			 D <= 426;
+			 E <= 160;
+			 F <= 688;
+			 Contador <= 0;
+        -----------------------------------------------
+	    -- Valores de las señales ROJO, VERDE y AZUL --
+	    -----------------------------------------------
+	      
+	    elsif (CLK0'event and CLK0 ='1')then
+			
+		-----------------------------------------------
+	    -- Valores de las señales ROJO, VERDE y AZUL --
+	    -----------------------------------------------
+
+	      
+			if ((CONT_V = 40) or (CONT_V = 41) or (CONT_V = 1058) or (CONT_V = 1059) or (CONT_V = 551) or (CONT_V = 552) or (CONT_V = 553)) then -- linea 1 y 480 con color blanco
+				if((CONT_H > 252) and (CONT_H < 1529)) then
+					ROJO   <= (others => '1');
+					VERDE <= (others => '1');
+					AZUL  <= (others => '1');
+				else 
+					ROJO   <= (others => '0');
+					VERDE <= (others => '0');
+					AZUL  <= (others => '0');
+				end if;
+				
+			elsif ((CONT_V > datoS-10) and (CONT_V < datoS+10))then
+				if((CONT_H = 253) or (CONT_H = 254) or (CONT_H = 1527) or (CONT_H = 1528))then -- pixel 1 y 640 con color blanco
+					ROJO   <= (others => '1');
+					VERDE <= (others => '1');
+					AZUL  <= (others => '1');
+					
+				elsif ((CONT_H > 400) and (CONT_H < 500)) then -- dibujar el color
+					ROJO   <= (others => '1');--color(0);
+					VERDE <= (others => '1');--color(1);
+					AZUL  <= (others => '1');--color(2);
+				else 
+					ROJO   <= (others => '0');
+					VERDE <= (others => '0');
+					AZUL  <= (others => '0');
+				end if;
+				
+			elsif ((CONT_V > datoS2-10) and (CONT_V < (datoS2+10)))then
+				if((CONT_H = 253) or (CONT_H = 254) or (CONT_H = 1527) or (CONT_H = 1528))then -- pixel 1 y 640 con color blanco
+					ROJO   <= (others => '1');
+					VERDE <= (others => '1');
+					AZUL  <= (others => '1');
+					
+				elsif ((CONT_H > 500) and (CONT_H < 600)) then -- dibujar el color
+					ROJO   <= (others => '1');--color(0);
+					VERDE <= (others => '1');--color(1);
+					AZUL  <= (others => '1');--color(2);
+				else 
+					ROJO   <= (others => '0');
+					VERDE <= (others => '0');
+					AZUL  <= (others => '0');
+				end if;
+			elsif ((CONT_V > datos3-10) and (CONT_V < datoS3+10))then
+				if((CONT_H = 253) or (CONT_H = 254) or (CONT_H = 1527) or (CONT_H = 1528))then -- pixel 1 y 640 con color blanco
+					ROJO   <= (others => '1');
+					VERDE <= (others => '1');
+					AZUL  <= (others => '1');
+					
+				elsif ((CONT_H > 600) and (CONT_H < 700)) then -- dibujar el color
+					ROJO   <= (others => '1');--color(0);
+					VERDE <= (others => '1');--color(1);
+					AZUL  <= (others => '1');--color(2);
+				else 
+					ROJO   <= (others => '0');
+					VERDE <= (others => '0');
+					AZUL  <= (others => '0');
+				end if;
+			elsif ((CONT_V > data(3)-10) and (CONT_V < data(3)+10))then
+				if((CONT_H = 253) or (CONT_H = 254) or (CONT_H = 1527) or (CONT_H = 1528))then -- pixel 1 y 640 con color blanco
+					ROJO   <= (others => '1');
+					VERDE <= (others => '1');
+					AZUL  <= (others => '1');
+					
+				elsif ((CONT_H > 700) and (CONT_H < 800)) then -- dibujar el color
+					ROJO   <= (others => '1');--color(0);
+					VERDE <= (others => '1');--color(1);
+					AZUL  <= (others => '1');--color(2);
+				else 
+					ROJO   <= (others => '0');
+					VERDE <= (others => '0');
+					AZUL  <= (others => '0');
+				end if;
+			elsif ((CONT_V > data(4)-10) and (CONT_V < data(4)+10))then
+				if((CONT_H = 253) or (CONT_H = 254) or (CONT_H = 1527) or (CONT_H = 1528))then -- pixel 1 y 640 con color blanco
+					ROJO   <= (others => '1');
+					VERDE <= (others => '1');
+					AZUL  <= (others => '1');
+					
+				elsif ((CONT_H > 800) and (CONT_H < 900)) then -- dibujar el color
+					ROJO   <= (others => '1');--color(0);
+					VERDE <= (others => '1');--color(1);
+					AZUL  <= (others => '1');--color(2);
+				else 
+					ROJO   <= (others => '0');
+					VERDE <= (others => '0');
+					AZUL  <= (others => '0');
+				end if;
+			elsif ((CONT_V > data(5)-10) and (CONT_V < data(5)+10))then
+				if((CONT_H = 253) or (CONT_H = 254) or (CONT_H = 1527) or (CONT_H = 1528))then -- pixel 1 y 640 con color blanco
+					ROJO   <= (others => '1');
+					VERDE <= (others => '1');
+					AZUL  <= (others => '1');
+					
+				elsif ((CONT_H > 900) and (CONT_H < 1000)) then -- dibujar el color
+					ROJO   <= (others => '1');--color(0);
+					VERDE <= (others => '1');--color(1);
+					AZUL  <= (others => '1');--color(2);
+				else 
+					ROJO   <= (others => '0');
+					VERDE <= (others => '0');
+					AZUL  <= (others => '0');
+				end if;
+			elsif ((CONT_V > data(6)-10) and (CONT_V < data(6)+10))then
+				if((CONT_H = 253) or (CONT_H = 254) or (CONT_H = 1527) or (CONT_H = 1528))then -- pixel 1 y 640 con color blanco
+					ROJO   <= (others => '1');
+					VERDE <= (others => '1');
+					AZUL  <= (others => '1');
+					
+				elsif ((CONT_H > 1000) and (CONT_H < 1100)) then -- dibujar el color
+					ROJO   <= (others => '1');--color(0);
+					VERDE <= (others => '1');--color(1);
+					AZUL  <= (others => '1');--color(2);
+				else 
+					ROJO   <= (others => '0');
+					VERDE <= (others => '0');
+					AZUL  <= (others => '0');
+				end if;
+			elsif ((CONT_V > data(7)-10) and (CONT_V < data(7)+10))then
+				if((CONT_H = 253) or (CONT_H = 254) or (CONT_H = 1527) or (CONT_H = 1528))then -- pixel 1 y 640 con color blanco
+					ROJO   <= (others => '1');
+					VERDE <= (others => '1');
+					AZUL  <= (others => '1');
+					
+				elsif ((CONT_H > 1100) and (CONT_H < 1200)) then -- dibujar el color
+					ROJO   <= (others => '1');--color(0);
+					VERDE <= (others => '1');--color(1);
+					AZUL  <= (others => '1');--color(2);
+				else 
+					ROJO   <= (others => '0');
+					VERDE <= (others => '0');
+					AZUL  <= (others => '0');
+				end if;
+			elsif ((CONT_V > data(8)-10) and (CONT_V < data(8)+10))then
+				if((CONT_H = 253) or (CONT_H = 254) or (CONT_H = 1527) or (CONT_H = 1528))then -- pixel 1 y 640 con color blanco
+					ROJO   <= (others => '1');
+					VERDE <= (others => '1');
+					AZUL  <= (others => '1');
+					
+				elsif ((CONT_H > 1200) and (CONT_H < 1300)) then -- dibujar el color
+					ROJO   <= (others => '1');--color(0);
+					VERDE <= (others => '1');--color(1);
+					AZUL  <= (others => '1');--color(2);
+				else 
+					ROJO   <= (others => '0');
+					VERDE <= (others => '0');
+					AZUL  <= (others => '0');
+				end if;
+			elsif ((CONT_V > data(9)-10) and (CONT_V < data(9)+10))then
+				if((CONT_H = 253) or (CONT_H = 254) or (CONT_H = 1527) or (CONT_H = 1528))then -- pixel 1 y 640 con color blanco
+					ROJO   <= (others => '1');
+					VERDE <= (others => '1');
+					AZUL  <= (others => '1');
+					
+				elsif ((CONT_H > 1300) and (CONT_H < 1400)) then -- dibujar el color
+					ROJO   <= (others => '1');--color(0);
+					VERDE <= (others => '1');--color(1);
+					AZUL  <= (others => '1');--color(2);
+				else 
+					ROJO   <= (others => '0');
+					VERDE <= (others => '0');
+					AZUL  <= (others => '0');
+				end if;
+				
+				
+				
+				
+			
+			elsif ((CONT_V > 41) and (CONT_V < 1058))then 
+
+				if((CONT_H = 253) or (CONT_H = 254) or (CONT_H = 1527) or (CONT_H = 1528))then -- pixel 1 y 640 con color blanco
+					ROJO   <= (others => '1');
+					VERDE <= (others => '1');
+					AZUL  <= (others => '1');
+				elsif ((CONT_H > 254) and (CONT_H < 1527)) then -- dibujar el color
+					ROJO   <= (others => '0');--color(0);
+					VERDE <= (others => '0');--color(1);
+					AZUL  <= (others => '0');--color(2);
+				else 
+					ROJO   <= (others => '0');
+					VERDE <= (others => '0');
+					AZUL  <= (others => '0');
+				end if;
+			else 
+				ROJO  <= (others => '0');
+				VERDE <= (others => '0');
+				AZUL  <= (others => '0');
+			end if;
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+--	        if(CONT_H = 848) then
+--			  
+--	        if (CONT_V > 40 and CONT_V < 241)then 
+--  	           C <= C-1;
+--      		  D <= D+1; 
+-- 				 contador <= contador +1;
+--	         elsif (CONT_V > 240 and CONT_V < 307) then
+--	            contador <= contador +1;
+--	         elsif (CONT_V > 306 and CONT_V < 507) then
+--	             E <= E+1;
+--	             F <= F -1;
+--	             contador <= contador +1;
+--	         else
+--					C <= 422;
+--					D <= 426;
+--					E <= 160;
+--					F <= 688;
+--	            contador <= 0;
+--	         end if;
+--	         end if;
+--	         -- dibujar el marco con color
+--        if ((CONT_V > 30 and CONT_V < 41) or (CONT_V > 503 and CONT_V < 514)) then  
+--		        if((CONT_H > 104) and (CONT_H < 744)) then
+--			
+--                  ROJO   <= "11111111";--amarillo
+--                  VERDE  <= "11111111";--amarillo
+--                  AZUL   <= "00000000";--amarillo
+--			     else 
+--           					ROJO   <= (others => '0');
+--								VERDE  <= (others => '0');
+--            				AZUL   <= (others => '0');
+--			     end if; 
+--        elsif ((CONT_V > 40 and CONT_V < 61) or (CONT_V > 482 and CONT_V < 502) )then 
+--              
+--              if((CONT_H > 104 and CONT_H < 115) or (CONT_H > 733  and CONT_H < 744))then -- 10 pixeles verticales (los dos lados)
+--                  ROJO   <= "11111111";--amarillo
+--                  VERDE  <= "11111111";--amarillo
+--                  AZUL   <= "00000000";--amarillo
+--              elsif ((CONT_H > 115) and (CONT_H < 732)) then -- fondo azul
+--                  ROJO   <= "00000000";--fondo azul claro
+--                  VERDE  <= "00000000";--fondo azul claro
+--                  AZUL   <= "00000011";--fondo azul claro
+--              else 
+--                  ROJO   <= (others => '0');
+--                  VERDE  <= (others => '0');
+--                  AZUL   <= (others => '0');
+--              end if;
+--        elsif ((CONT_V > 60) and (CONT_V < 481))then
+--          
+--              if((CONT_H > 104 and CONT_H < 115) or (CONT_H > 733  and CONT_H < 744))then -- 10 pixeles verticales
+--                  ROJO   <= "11111111";--amarillo
+--                  VERDE  <= "11111111";--amarillo
+--                  AZUL   <= "00000000";--amarillo
+--              elsif(contador < 200 and ((CONT_H > 114) and (CONT_H < 732))) then
+--              
+--                if(CONT_H > A and CONT_H < B) then
+--                    ROJO   <= "11111111";-- la columna vertical (gris)
+--                    VERDE  <= "11111111";
+--                    AZUL   <= "11111111";
+--                    
+--                elsif(CONT_H > C and CONT_H < D) then
+--							if (contador < 50 or (contador > 99 and contador < 150))then
+--					 
+--								ROJO   <= "11111111";--un color (rojo)
+--                        VERDE  <= "00000000";
+--                        AZUL   <= "00000000";      
+--							else
+--								ROJO   <= "00000000";-- Otro color
+--                        VERDE  <= "00000000";
+--                        AZUL   <= "11111111";
+--							end if;
+--					else 
+--                    ROJO   <= "00000000";--fondo azul claro
+--						  VERDE  <= "00000000";--fondo azul claro
+--						  AZUL   <= "01000011";--fondo azul claro
+--                end if;
+--              elsif((contador > 199 and contador < 300) and ((CONT_H > 114) and (CONT_H < 732))) then
+--					 
+--                if(CONT_H > A and CONT_H < B) then
+--                    ROJO   <= "11111111";-- la columna vertical (gris)
+--                    VERDE  <= "11111111";
+--                    AZUL   <= "11111111";
+--                else 
+--                    ROJO   <= "00000000";--fondo azul claro
+--						  VERDE  <= "00000000";--fondo azul claro
+--						  AZUL   <= "01000011";--fondo azul claro
+--                end if;
+--              elsif((contador > 299 and contador < 420) and ((CONT_H > 106) and (CONT_H < 739))) then
+--              
+--                if(CONT_H > E and CONT_H < F) then
+--                    if((contador > 299 and contador < 330) or (contador > 359 and contador < 390)) then
+--                    
+--                        ROJO   <= "11111111";--un color (rojo)
+--                        VERDE  <= "00000000";
+--                        AZUL   <= "00000000";
+--                    elsif((contador > 329 and contador < 360) or (contador > 489 and contador < 420)) then
+--                        ROJO   <= "00000000";-- Otro color
+--                        VERDE  <= "00000000";
+--                        AZUL   <= "11111111";
+--                    end if;
+--                else 
+--                    ROJO   <= "00000000";--fondo azul claro
+--						  VERDE  <= "00000000";--fondo azul claro
+--						  AZUL   <= "01000011";--fondo azul claro
+--                end if;
+--              else 
+--                  ROJO   <= (others => '0');
+--                  VERDE  <= (others => '0');
+--                  AZUL   <= (others => '0');
+--              end if;
+--        
+--        
+--        else  
+--              ROJO  <= (others => '0');
+--              VERDE <= (others => '0');
+--              AZUL  <= (others => '0');
+--        end if;
+        
+		end if;--CLK
+	end process;
+end generador;

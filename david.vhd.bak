@@ -1,0 +1,18 @@
+						  
+PACKAGE david IS
+	type datas is array (9 downto 0) of integer range -127 to 128;
+END david;
+-- 
+--     -- Declaración del cuerpo
+--PACKAGE BODY david IS
+--    CONSTANT inicio : dir_type := X"FFFF0000";
+-- 
+--    FUNCTION inttodato(valor : integer) RETURN dato_type IS
+--         -- Cuerpo de la función
+--    END inttodato;
+-- 
+--    PROCEDURE datotoint(dato : IN dato_type; valor : OUT integer) IS
+--         -- Cuerpo del procedimiento
+--    END datotoint;
+-- 
+--END PACKAGE BODY mi_paquete;

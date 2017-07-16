@@ -1,0 +1,11 @@
+v1
+DSP_BALANCING_IMPLEMENTATION,DSP_BLOCKS,Display:DISP|Main:PICT|MainImage:MAIN|lpm_mult:Mult0|mult_e9t:auto_generated|mac_out2,
+DSP_BALANCING_IMPLEMENTATION,DSP_BLOCKS,Display:DISP|Main:PICT|Picture:PICT|Frequency:PFU|lpm_mult:Mult0|mult_58t:auto_generated|mac_out2,
+DSP_BALANCING_IMPLEMENTATION,DSP_BLOCKS,Display:DISP|Main:PICT|Picture:PICT|CheckSignalDown:CSD|ModeAutomaticSelect:MAU|ModeAutomatic:MAU|Button:BT1|lpm_mult:Mult0|mult_33t:auto_generated|mac_out2,
+DSP_BALANCING_IMPLEMENTATION,DSP_BLOCKS,Display:DISP|Main:PICT|Picture:PICT|CheckSignalDown:CSD|ModeAutomaticSelect:MAU|ModeAutomatic:MAU|Button:BT4|lpm_mult:Mult1|mult_33t:auto_generated|mac_out2,
+DSP_BALANCING_IMPLEMENTATION,DSP_BLOCKS,Display:DISP|Main:PICT|Picture:PICT|CheckSignalDown:CSD|ModeAutomaticSelect:MAU|ModeAutomatic:MAU|Button:BT2|lpm_mult:Mult0|mult_33t:auto_generated|mac_out2,
+DSP_BALANCING_IMPLEMENTATION,DSP_BLOCKS,Display:DISP|Main:PICT|Picture:PICT|CheckSignalDown:CSD|ModeAutomaticSelect:MAU|ModeAutomatic:MAU|Button:BT3|lpm_mult:Mult0|mult_33t:auto_generated|mac_out2,
+DSP_BALANCING_IMPLEMENTATION,DSP_BLOCKS,Display:DISP|Main:PICT|Picture:PICT|CheckSignalDown:CSD|ModeAutomaticSelect:MAU|ModeAutomatic:MAU|Button:BT4|lpm_mult:Mult0|mult_33t:auto_generated|mac_out2,
+DSP_BALANCING_IMPLEMENTATION,DSP_BLOCKS,Display:DISP|Main:PICT|MainImage:MAIN|lpm_mult:Mult0|mult_e9t:auto_generated|mac_out4,
+DSP_BALANCING_IMPLEMENTATION,DSP_BLOCKS,Display:DISP|Main:PICT|Picture:PICT|Frequency:PFU|lpm_mult:Mult0|mult_58t:auto_generated|mac_out4,
+PORT_SWAPPING,PORT_SWAP_TYPE_DSPMULT,Display:DISP|Main:PICT|MainImage:MAIN|lpm_mult:Mult0|mult_e9t:auto_generated|mac_mult3,

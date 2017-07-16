@@ -1,0 +1,22 @@
+LIBRARY ieee;
+	USE ieee.std_logic_1164.all;
+	USE ieee.std_logic_signed.all;
+	USE work.david.ALL;
+
+ENTITY screenRealTime IS
+	PORT(	CLK0 				: IN STD_LOGIC;
+			CONT_H, CONT_V		: IN integer;
+			datoS				: IN ausculation100;
+			screen1				: OUT fullScreen;
+	);
+END screenRealTime;
+
+ARCHITECTURE Behavior OF sonido IS
+
+	
+BEGIN
+	
+	process(CLOCK_50, reset)
+		begin
+	end process
+END Behavior;

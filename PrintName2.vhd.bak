@@ -1,0 +1,2847 @@
+LIBRARY ieee;
+  USE ieee.std_logic_1164.all;
+  USE ieee.std_logic_unsigned.all;
+	use ieee.numeric_std.all;
+  USE work.david.all;
+  
+ENTITY PrintName IS
+	GENERIC( 	VERTICAL				: NATURAL;
+				HORIZONTAL			: NATURAL
+	);
+	PORT(		CLOCK_108M 			: IN STD_LOGIC;
+				CONT_H, CONT_V		: IN INTEGER;
+				NUMBER				: IN INTEGER;
+				ROJO,VERDE,AZUL		: OUT STD_LOGIC_VECTOR(7 downto 0)
+	);
+END PrintName;
+
+ARCHITECTURE behavior OF PrintName IS
+	signal X	: INTEGER RANGE 0 to 296;
+	signal Y	: INTEGER RANGE 0 to 14;
+	begin
+	
+	X <= CONT_H - HORIZONTAL;
+	Y <= CONT_V - VERTICAL;
+	
+	process(CLOCK_108M)
+		begin
+			if ((CLOCK_108M'event and CLOCK_108M = '1')) then
+				if (NUMBER = 0) then -- AUSCULTACION AORTICA NORMAL
+					if X > 1 and X < 11 then -- A
+						if X = 3 or X = 10 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 or Y = 7 then
+								if X > 3 then 
+									ROJO  <= (others => '1');
+									VERDE <= (others => '1');
+									AZUL  <= (others => '1');
+								else
+									ROJO  <= (others => '0');
+									VERDE <= (others => '0');
+									AZUL  <= (others => '0');
+								end if;
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+					elsif X > 11 and X < 20 then -- U
+						if X = 12 or X = 19 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+					elsif X > 20 and X < 29 then -- S
+						if X = 21 then
+							if Y < 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						elsif X = 28 then
+							if Y > 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						else
+							if Y = 0 or Y = 14 or Y = 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+					elsif X > 29 and X < 38 then -- C
+						if X = 30 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 38 and X < 47 then -- U
+						if X = 39 or X = 46 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 47 and X < 56 then -- L
+						if X = 48 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 56 and X < 65 then -- T
+						if X = 60 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 65 and X < 74 then -- A
+						if X = 66 or X = 73 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 7 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 74 and X < 83 then -- C
+						if X = 75 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 83 and X < 92 then -- I
+						if X = 87 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 or Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 92 and X < 101 then -- O
+						if X = 93 or X = 100 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 101 and X < 110 then -- N
+						if X = 102 or X = 109 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if (X = 103 and Y = 1) or (X = 104 and Y = 2) or (X = 105 and Y = 3) or (X = 106 and Y = 4) or  (X = 107 and Y = 5) or (X = 108 and Y = 6) then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+
+					elsif X > 119 and X < 128 then -- A
+						if X = 120 or X = 127 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 7 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+
+					elsif X > 128 and X < 137 then -- O
+						if X = 129 or X = 136 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 137 and X < 146 then -- R
+						if X = 138 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						elsif X = 145 then
+							if Y > 7 or Y < 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						else
+							if Y = 0 or Y = 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 146 and X < 155 then -- T
+						if X = 150 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 155 and X < 164 then -- I
+						if X = 159 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 or Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 164 and X < 173 then -- C
+						if X = 165 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 173 and X < 182 then -- A
+						if X = 174 or X = 181 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 7 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 191 and X < 200 then -- N
+						if X = 192 or X = 199 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if (X = 193 and Y = 1) or (X = 194 and Y = 2) or (X = 195 and Y = 3) or (X = 196 and Y = 4) or  (X = 197 and Y = 5) or (X = 198 and Y = 6) then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 200 and X < 209 then -- O
+						if X = 201 or X = 208 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 209 and X < 218 then -- R
+						if X = 210 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						elsif X = 217 then
+							if Y > 7 or Y < 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						else
+							if Y = 0 or Y = 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+					elsif X > 218 and X < 227 then -- M
+						if X = 219 or X = 226 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if (X = 220 and Y = 1) or (X = 221 and Y = 2) or (X = 222 and Y = 3) or (X = 223 and Y = 3) or  (X = 224 and Y = 2) or (X = 225 and Y = 1) then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+
+					elsif X > 227 and X < 236 then -- A
+						if X = 228 or X = 235 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 7 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 236 and X < 245 then -- L
+						if X = 237 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+					else 
+						ROJO  <= (others => '0');
+						VERDE <= (others => '0');
+						AZUL  <= (others => '0');
+					end if;
+					
+					
+					
+					
+				elsif (NUMBER = 1) then -- AUSCULTACION AORTICA SOPLO DIASTOLITICO
+					if X > 1 and X < 11 then -- A
+						if X = 3 or X = 10 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 or Y = 7 then
+								if X > 3 then 
+									ROJO  <= (others => '1');
+									VERDE <= (others => '1');
+									AZUL  <= (others => '1');
+								else
+									ROJO  <= (others => '0');
+									VERDE <= (others => '0');
+									AZUL  <= (others => '0');
+								end if;
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+					elsif X > 11 and X < 20 then -- U
+						if X = 12 or X = 19 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+					elsif X > 20 and X < 29 then -- S
+						if X = 21 then
+							if Y < 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						elsif X = 28 then
+							if Y > 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						else
+							if Y = 0 or Y = 14 or Y = 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+					elsif X > 29 and X < 38 then -- C
+						if X = 30 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 38 and X < 47 then -- U
+						if X = 39 or X = 46 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 47 and X < 56 then -- L
+						if X = 48 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 56 and X < 65 then -- T
+						if X = 60 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 65 and X < 74 then -- A
+						if X = 66 or X = 73 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 7 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 74 and X < 83 then -- C
+						if X = 75 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 83 and X < 92 then -- I
+						if X = 87 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 or Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 92 and X < 101 then -- O
+						if X = 93 or X = 100 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 101 and X < 110 then -- N
+						if X = 102 or X = 109 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if (X = 103 and Y = 1) or (X = 104 and Y = 2) or (X = 105 and Y = 3) or (X = 106 and Y = 4) or  (X = 107 and Y = 5) or (X = 108 and Y = 6) then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+
+					elsif X > 119 and X < 128 then -- A
+						if X = 120 or X = 127 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 7 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+
+					elsif X > 128 and X < 137 then -- O
+						if X = 129 or X = 136 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 137 and X < 146 then -- R
+						if X = 138 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						elsif X = 145 then
+							if Y > 7 or Y < 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						else
+							if Y = 0 or Y = 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 146 and X < 155 then -- T
+						if X = 150 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 155 and X < 164 then -- I
+						if X = 159 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 or Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 164 and X < 173 then -- C
+						if X = 165 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 173 and X < 182 then -- A
+						if X = 174 or X = 181 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 7 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 191 and X < 200 then -- S
+						if X = 192 then
+							if Y < 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						elsif X = 199 then
+							if Y > 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						else
+							if Y = 0 or Y = 14 or Y = 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 200 and X < 209 then -- O
+						if X = 201 or X = 208 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 209 and X < 218 then -- P
+						if X = 210 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						elsif X = 217 then
+							if Y < 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						else
+							if Y = 0 or Y = 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 218 and X < 227 then -- L
+						if X = 219 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 227 and X < 236 then -- O
+						if X = 228 or X = 235 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 245 and X < 254 then -- D
+						if X = 246  then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						elsif X = 253  then
+							if Y > 0 and Y < 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 254 and X < 263 then -- I
+						if X = 258 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 or Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 263 and X < 272 then -- A
+						if X = 264 or X = 271 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 7 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 272 and X < 281 then -- S
+						if X = 273 then
+							if Y < 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						elsif X = 280 then
+							if Y > 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						else
+							if Y = 0 or Y = 14 or Y = 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 281 and X < 290 then -- T
+						if X = 285 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 290 and X < 299 then -- O
+						if X = 291 or X = 298 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 299 and X < 308 then -- L
+						if X = 300 or X = 307 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 308 and X < 317 then -- I
+						if X = 312 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 or Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 317 and X < 326 then -- T
+						if X = 321 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 326 and X < 335 then -- I
+						if X = 330 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 or Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 335 and X < 344 then -- C
+						if X = 336 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 344 and X < 353 then -- O
+						if X = 345 or X = 352 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					else 
+						ROJO  <= (others => '0');
+						VERDE <= (others => '0');
+						AZUL  <= (others => '0');
+					end if;
+
+				elsif (NUMBER = 2) then -- AUSCULTACION AORTICA SOPLO SISTOLITICO
+					if X > 1 and X < 11 then -- A
+						if X = 3 or X = 10 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 or Y = 7 then
+								if X > 3 then 
+									ROJO  <= (others => '1');
+									VERDE <= (others => '1');
+									AZUL  <= (others => '1');
+								else
+									ROJO  <= (others => '0');
+									VERDE <= (others => '0');
+									AZUL  <= (others => '0');
+								end if;
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+					elsif X > 11 and X < 20 then -- U
+						if X = 12 or X = 19 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+					elsif X > 20 and X < 29 then -- S
+						if X = 21 then
+							if Y < 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						elsif X = 28 then
+							if Y > 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						else
+							if Y = 0 or Y = 14 or Y = 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+					elsif X > 29 and X < 38 then -- C
+						if X = 30 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 38 and X < 47 then -- U
+						if X = 39 or X = 46 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 47 and X < 56 then -- L
+						if X = 48 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 56 and X < 65 then -- T
+						if X = 60 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 65 and X < 74 then -- A
+						if X = 66 or X = 73 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 7 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 74 and X < 83 then -- C
+						if X = 75 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 83 and X < 92 then -- I
+						if X = 87 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 or Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 92 and X < 101 then -- O
+						if X = 93 or X = 100 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 101 and X < 110 then -- N
+						if X = 102 or X = 109 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if (X = 103 and Y = 1) or (X = 104 and Y = 2) or (X = 105 and Y = 3) or (X = 106 and Y = 4) or  (X = 107 and Y = 5) or (X = 108 and Y = 6) then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+
+					elsif X > 119 and X < 128 then -- A
+						if X = 120 or X = 127 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 7 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+
+					elsif X > 128 and X < 137 then -- O
+						if X = 129 or X = 136 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 137 and X < 146 then -- R
+						if X = 138 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						elsif X = 145 then
+							if Y > 7 or Y < 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						else
+							if Y = 0 or Y = 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 146 and X < 155 then -- T
+						if X = 150 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 155 and X < 164 then -- I
+						if X = 159 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 or Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 164 and X < 173 then -- C
+						if X = 165 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 173 and X < 182 then -- A
+						if X = 174 or X = 181 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 7 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 191 and X < 200 then -- S
+						if X = 192 then
+							if Y < 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						elsif X = 199 then
+							if Y > 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						else
+							if Y = 0 or Y = 14 or Y = 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 200 and X < 209 then -- O
+						if X = 201 or X = 208 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 209 and X < 218 then -- P
+						if X = 210 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						elsif X = 217 then
+							if Y < 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						else
+							if Y = 0 or Y = 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 218 and X < 227 then -- L
+						if X = 219 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 227 and X < 236 then -- O
+						if X = 228 or X = 235 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 245 and X < 254 then -- S
+						if X = 246 then
+							if Y < 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						elsif X = 253 then
+							if Y > 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						else
+							if Y = 0 or Y = 14 or Y = 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 254 and X < 263 then -- I
+						if X = 258 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 or Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+					elsif X > 263 and X < 272 then -- S
+						if X = 264 then
+							if Y < 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						elsif X = 271 then
+							if Y > 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						else
+							if Y = 0 or Y = 14 or Y = 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 272 and X < 281 then -- T
+						if X = 276 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+					elsif X > 281 and X < 290 then -- O
+						if X = 282 or X = 289 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 290 and X < 299 then -- L
+						if X = 291 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 299 and X < 308 then -- I
+
+						if X = 303 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 or Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+					elsif X > 308 and X < 317 then -- T
+
+						if X = 312 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+					elsif X > 317 and X < 326 then -- I
+						if X = 321 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 or Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+					elsif X > 326 and X < 335 then -- C
+						if X = 325 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 335 and X < 344 then -- O
+						if X = 336 or X = 343 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					else 
+						ROJO  <= (others => '0');
+						VERDE <= (others => '0');
+						AZUL  <= (others => '0');
+					end if;
+
+
+				elsif (NUMBER = 3) then -- AUSCULTACION AORTICA SOPLO SISTOLITICO Y DIASTOLITICO
+					if X > 1 and X < 11 then -- A
+						if X = 3 or X = 10 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 or Y = 7 then
+								if X > 3 then 
+									ROJO  <= (others => '1');
+									VERDE <= (others => '1');
+									AZUL  <= (others => '1');
+								else
+									ROJO  <= (others => '0');
+									VERDE <= (others => '0');
+									AZUL  <= (others => '0');
+								end if;
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+					elsif X > 11 and X < 20 then -- U
+						if X = 12 or X = 19 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+					elsif X > 20 and X < 29 then -- S
+						if X = 21 then
+							if Y < 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						elsif X = 28 then
+							if Y > 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						else
+							if Y = 0 or Y = 14 or Y = 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+					elsif X > 29 and X < 38 then -- C
+						if X = 30 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 38 and X < 47 then -- U
+						if X = 39 or X = 46 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 47 and X < 56 then -- L
+						if X = 48 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 56 and X < 65 then -- T
+						if X = 60 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 65 and X < 74 then -- A
+						if X = 66 or X = 73 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 7 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 74 and X < 83 then -- C
+						if X = 75 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 83 and X < 92 then -- I
+						if X = 87 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 or Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 92 and X < 101 then -- O
+						if X = 93 or X = 100 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 101 and X < 110 then -- N
+						if X = 102 or X = 109 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if (X = 103 and Y = 1) or (X = 104 and Y = 2) or (X = 105 and Y = 3) or (X = 106 and Y = 4) or  (X = 107 and Y = 5) or (X = 108 and Y = 6) then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+
+					elsif X > 119 and X < 128 then -- A
+						if X = 120 or X = 127 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 7 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+
+					elsif X > 128 and X < 137 then -- O
+						if X = 129 or X = 136 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 137 and X < 146 then -- R
+						if X = 138 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						elsif X = 145 then
+							if Y > 7 or Y < 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						else
+							if Y = 0 or Y = 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 146 and X < 155 then -- T
+						if X = 150 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 155 and X < 164 then -- I
+						if X = 159 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 or Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 164 and X < 173 then -- C
+						if X = 165 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 173 and X < 182 then -- A
+						if X = 174 or X = 181 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 7 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 191 and X < 200 then -- S
+						if X = 192 then
+							if Y < 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						elsif X = 199 then
+							if Y > 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						else
+							if Y = 0 or Y = 14 or Y = 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 200 and X < 209 then -- O
+						if X = 201 or X = 208 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 209 and X < 218 then -- P
+						if X = 210 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						elsif X = 217 then
+							if Y < 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						else
+							if Y = 0 or Y = 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 218 and X < 227 then -- L
+						if X = 219 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 227 and X < 236 then -- O
+						if X = 228 or X = 235 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 245 and X < 254 then -- D
+						if X = 246  then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						elsif X = 253  then
+							if Y > 0 and Y < 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 254 and X < 263 then -- I
+						if X = 258 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 or Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 263 and X < 272 then -- A
+						if X = 264 or X = 271 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 7 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 272 and X < 281 then -- S
+						if X = 273 then
+							if Y < 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						elsif X = 280 then
+							if Y > 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						else
+							if Y = 0 or Y = 14 or Y = 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 281 and X < 290 then -- T
+						if X = 285 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 290 and X < 299 then -- O
+						if X = 291 or X = 298 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 299 and X < 308 then -- L
+						if X = 300  then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 308 and X < 317 then -- I
+						if X = 312 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 or Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 317 and X < 326 then -- T
+						if X = 321 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 326 and X < 335 then -- I
+						if X = 330 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 or Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 335 and X < 344 then -- C
+						if X = 336 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 344 and X < 353 then -- O
+						if X = 345 or X = 352 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+						
+					elsif X > 362 and X < 371 then -- Y
+						if X = 366  then
+							if Y < 2 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						elsif (X = 363 and Y = 0) or (X = 364 and Y = 1) or (X = 365 and Y = 2) or(X = 366 and Y = 2) or (X = 367 and Y = 1) or (X = 368 and Y = 0) then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							ROJO  <= (others => '0');
+							VERDE <= (others => '0');
+							AZUL  <= (others => '0');
+						end if;
+
+					
+					elsif X > 380 and X < 389 then -- S
+						if X = 381 then
+							if Y < 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						elsif X = 388 then
+							if Y > 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						else
+							if Y = 0 or Y = 14 or Y = 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 389 and X < 398 then -- I
+						if X = 393 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 or Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+					elsif X > 398 and X < 407 then -- S
+						if X = 399 then
+							if Y < 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						elsif X = 406 then
+							if Y > 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						else
+							if Y = 0 or Y = 14 or Y = 7 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 407 and X < 416 then -- T
+						if X = 411 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+					elsif X > 416 and X < 425 then -- O
+						if X = 417 or X = 424 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 425 and X < 434 then -- L
+						if X = 426 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 434 and X < 445 then -- I
+
+						if X = 438 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 or Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+					elsif X > 445 and X < 454 then -- T
+
+						if X = 449 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+					elsif X > 454 and X < 463 then -- I
+						if X = 458 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 0 or Y = 14 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+					elsif X > 463 and X < 472 then -- C
+						if X = 464 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+
+					elsif X > 472 and X < 481 then -- O
+						if X = 473 or X = 480 then
+							ROJO  <= (others => '1');
+							VERDE <= (others => '1');
+							AZUL  <= (others => '1');
+						else
+							if Y = 14 or Y = 0 then
+								ROJO  <= (others => '1');
+								VERDE <= (others => '1');
+								AZUL  <= (others => '1');
+							else
+								ROJO  <= (others => '0');
+								VERDE <= (others => '0');
+								AZUL  <= (others => '0');
+							end if;
+						end if;
+					else 
+						ROJO  <= (others => '0');
+						VERDE <= (others => '0');
+						AZUL  <= (others => '0');
+					end if;
+
+
+				else
+					ROJO  <= (others => '0');
+					VERDE <= (others => '0');
+					AZUL  <= (others => '0');
+
+				end if;
+			end if;
+			
+	end process;
+	
+end behavior;--

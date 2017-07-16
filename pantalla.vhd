@@ -1,0 +1,108 @@
+LIBRARY ieee;
+  USE ieee.std_logic_1164.ALL;
+  USE ieee.std_logic_unsigned.ALL;
+  USE ieee.std_logic_arith.ALL;
+  
+ENTITY pantalla IS
+	PORT(	SW 								: IN STD_LOGIC_VECTOR (7 DOWNTO 0);
+			CLOCK_50, KEY		 			: IN STD_LOGIC;
+			LEDR 							: OUT STD_LOGIC_VECTOR(0 DOWNTO 0);
+			DATA							: IN STD_LOGIC_VECTOR(23 DOWNTO 0);
+			HEX0, HEX1, HEX2, HEX3			: OUT STD_LOGIC_VECTOR(6 DOWNTO 0); 
+			CLKaux							: IN STD_LOGIC;
+
+			--Video
+			VGA_SYNC, VGA_BLANK, VGA_CLK	: OUT STD_LOGIC;
+			VGA_HS, VGA_VS 					: OUT STD_LOGIC;
+			VGA_R, VGA_G, VGA_B 			: OUT STD_LOGIC_VECTOR(7 DOWNTO 0)
+	);
+END pantalla;
+
+ARCHITECTURE Behavior OF pantalla IS
+  
+	signal hsync, vsync	:	std_logic;
+	signal red_signal,	green_signal, blue_signal	: std_logic_vector (7 DOWNTO 0);
+	signal h_cnt, v_cnt : integer;
+	signal C: std_logic;
+	signal prueba: integer;
+	signal RESET: std_logic;
+  
+	COMPONENT PLLpantalla IS
+		PORT(	inclk0	: IN STD_LOGIC;
+				C0 		: OUT STD_LOGIC
+		);
+    END COMPONENT;
+	
+	COMPONENT imagen IS
+		PORT(	CLOCK_50,CLK0,RESET0 	: IN STD_LOGIC;
+				CLKaux											: in STD_LOGIC;
+
+				DATA							: IN STD_LOGIC_VECTOR(23 downto 0);
+--				HEX0, HEX1, HEX2, HEX3			: OUT STD_LOGIC_VECTOR(6 downto 0); 
+				CONT_H, CONT_V	: IN INTEGER;
+				ROJO,VERDE,AZUL	: OUT STD_LOGIC_VECTOR(7 downto 0)
+		);
+    END COMPONENT;
+
+	BEGIN
+    
+	U: PLLpantalla PORT MAP (CLOCK_50,C);
+    V: imagen PORT MAP (CLOCK_50,C,RESET,CLKaux,DATA,h_cnt,v_cnt,red_signal,green_signal,blue_signal);
+
+    VGA_SYNC  <= '1';
+    VGA_BLANK <= '1';
+	RESET <= KEY;
+	
+	LEDR(0)<=CLKaux;
+	
+    PROCESS(C,RESET)
+		BEGIN
+        
+		IF (RESET = '0') THEN
+			hsync <='0';
+			vsync <='0';
+			h_cnt<=0;
+			v_cnt<=0;
+			
+		ELSIF (C 'EVENT and C = '1') THEN
+			
+			-- Vertical Syncronism
+			IF (v_cnt < 1063  ) THEN
+				vsync <= '1';
+			ELSE
+				vsync <= '0';
+			END IF;
+				
+			-- Vertical Counter
+			IF (v_cnt = 1066) THEN
+				v_cnt <= 0;
+			ELSIF (h_cnt = 1688) THEN
+				v_cnt <= v_cnt + 1;
+			END IF;
+				
+			-- Horizontal Counter
+			IF (h_cnt = 1688) THEN
+				h_cnt <= 0;
+			ELSE
+				h_cnt <= h_cnt + 1;
+			END IF;
+				
+			-- Horizontal Syncronism
+			IF (h_cnt < 1576) THEN
+				hsync <= '1';
+			ELSE
+				hsync <= '0';
+			END IF; 
+			
+		END IF;  
+		
+    END PROCESS;
+	
+    VGA_CLK <= C;
+    VGA_HS <= hsync;
+    VGA_VS <= vsync;
+    VGA_R  <= red_signal;
+    VGA_G  <= green_signal;
+    VGA_B  <= blue_signal;
+  
+END Behavior;

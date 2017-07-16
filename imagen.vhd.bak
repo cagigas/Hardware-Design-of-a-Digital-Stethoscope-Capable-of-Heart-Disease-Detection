@@ -1,0 +1,157 @@
+library ieee;
+  use ieee.std_logic_1164.all;
+  use ieee.std_logic_unsigned.all;
+  
+entity imagen is
+  port(CLK0,RESET0: in std_logic;
+       CONT_H, CONT_V:in integer;
+       ROJO,VERDE,AZUL: out std_logic_vector (9 downto 0));
+end imagen;
+
+
+architecture generador of imagen is
+  signal A,B,C,D,E,F,contador: integer;
+  
+ begin
+   
+   process(CLK0)
+     
+     begin
+        
+        if(RESET0='0')then
+          ROJO   <= (others => '0');
+          VERDE  <= (others => '0');
+      	 AZUL   <= (others => '0');
+      	 A <= 422;
+      	 B <= 426;
+      	 C <= 422;
+      	 D <= 426;
+      	 E <= 160;
+      	 F <= 688;
+      	 Contador <= 0;
+        -----------------------------------------------
+	      -- Valores de las señales ROJO, VERDE y AZUL --
+	      -----------------------------------------------
+	      
+	      elsif (CLK0'event and CLK0 ='1')then
+	        if(CONT_H = 848) then
+			  
+	        if (CONT_V > 40 and CONT_V < 241)then 
+  	           C <= C-1;
+      		  D <= D+1; 
+ 				 contador <= contador +1;
+	         elsif (CONT_V > 240 and CONT_V < 307) then
+	            contador <= contador +1;
+	         elsif (CONT_V > 306 and CONT_V < 507) then
+	             E <= E+1;
+	             F <= F -1;
+	             contador <= contador +1;
+	         else
+					C <= 422;
+					D <= 426;
+					E <= 160;
+					F <= 688;
+	            contador <= 0;
+	         end if;
+	         end if;
+	         -- dibujar el marco con color
+        if ((CONT_V > 30 and CONT_V < 41) or (CONT_V > 503 and CONT_V < 514)) then  
+		        if((CONT_H > 104) and (CONT_H < 744)) then
+			
+                  ROJO   <= "1111111111";--amarillo
+                  VERDE  <= "1111111111";--amarillo
+                  AZUL   <= "0000000000";--amarillo
+			     else 
+           					ROJO   <= (others => '0');
+								VERDE  <= (others => '0');
+            				AZUL   <= (others => '0');
+			     end if; 
+        elsif ((CONT_V > 40 and CONT_V < 61) or (CONT_V > 482 and CONT_V < 502) )then 
+              
+              if((CONT_H > 104 and CONT_H < 115) or (CONT_H > 733  and CONT_H < 744))then -- 10 pixeles verticales (los dos lados)
+                  ROJO   <= "1111111111";--amarillo
+                  VERDE  <= "1111111111";--amarillo
+                  AZUL   <= "0000000000";--amarillo
+              elsif ((CONT_H > 115) and (CONT_H < 732)) then -- fondo azul
+                  ROJO   <= "0000000000";--fondo azul claro
+                  VERDE  <= "0000000000";--fondo azul claro
+                  AZUL   <= "0100000011";--fondo azul claro
+              else 
+                  ROJO   <= (others => '0');
+                  VERDE  <= (others => '0');
+                  AZUL   <= (others => '0');
+              end if;
+        elsif ((CONT_V > 60) and (CONT_V < 481))then
+          
+              if((CONT_H > 104 and CONT_H < 115) or (CONT_H > 733  and CONT_H < 744))then -- 10 pixeles verticales
+                  ROJO   <= "1111111111";--amarillo
+                  VERDE  <= "1111111111";--amarillo
+                  AZUL   <= "0000000000";--amarillo
+              elsif(contador < 200 and ((CONT_H > 114) and (CONT_H < 732))) then
+              
+                if(CONT_H > A and CONT_H < B) then
+                    ROJO   <= "1111111111";-- la columna vertical (gris)
+                    VERDE  <= "1111111111";
+                    AZUL   <= "1111111111";
+                    
+                elsif(CONT_H > C and CONT_H < D) then
+							if (contador < 50 or (contador > 99 and contador < 150))then
+					 
+								ROJO   <= "1111111111";--un color (rojo)
+                        VERDE  <= "0000000000";
+                        AZUL   <= "0000000000";      
+							else
+								ROJO   <= "0000000000";-- Otro color
+                        VERDE  <= "0000000000";
+                        AZUL   <= "1111111111";
+							end if;
+					else 
+                    ROJO   <= "0000000000";--fondo azul claro
+						  VERDE  <= "0000000000";--fondo azul claro
+						  AZUL   <= "0100000011";--fondo azul claro
+                end if;
+              elsif((contador > 199 and contador < 300) and ((CONT_H > 114) and (CONT_H < 732))) then
+					 
+                if(CONT_H > A and CONT_H < B) then
+                    ROJO   <= "1111111111";-- la columna vertical (gris)
+                    VERDE  <= "1111111111";
+                    AZUL   <= "1111111111";
+                else 
+                    ROJO   <= "0000000000";--fondo azul claro
+						  VERDE  <= "0000000000";--fondo azul claro
+						  AZUL   <= "0100000011";--fondo azul claro
+                end if;
+              elsif((contador > 299 and contador < 420) and ((CONT_H > 106) and (CONT_H < 739))) then
+              
+                if(CONT_H > E and CONT_H < F) then
+                    if((contador > 299 and contador < 330) or (contador > 359 and contador < 390)) then
+                    
+                        ROJO   <= "1111111111";--un color (rojo)
+                        VERDE  <= "0000000000";
+                        AZUL   <= "0000000000";
+                    elsif((contador > 329 and contador < 360) or (contador > 489 and contador < 420)) then
+                        ROJO   <= "0000000000";-- Otro color
+                        VERDE  <= "0000000000";
+                        AZUL   <= "1111111111";
+                    end if;
+                else 
+                    ROJO   <= "0000000000";--fondo azul claro
+						  VERDE  <= "0000000000";--fondo azul claro
+						  AZUL   <= "0100000011";--fondo azul claro
+                end if;
+              else 
+                  ROJO   <= (others => '0');
+                  VERDE  <= (others => '0');
+                  AZUL   <= (others => '0');
+              end if;
+        
+        
+        else  
+              ROJO  <= (others => '0');
+              VERDE <= (others => '0');
+              AZUL  <= (others => '0');
+        end if;
+        
+     end if;--CLK
+   end process;
+ end generador;
